@@ -29,5 +29,20 @@ Usage
 Once the extension is installed, simply use it in your code by  :
 
 ```php
-<?= \ptrnov\yii2-salesforce\Jadwal::world() ?>
+<?= \ptrnov\yii2-salesforce\Jadwal::listWeekOfYear() ?>
 ```
+
+Use \ptrnov\yii2-salesforce\Jadwal;
+
+$ary1=Jadwal::listWeekOfYear();				//current year
+print_r($ary1);
+
+$ary2=Jadwal::listWeekOfYear('2016');		//set manual
+print_r($ary2);
+
+$tgl=getDateOfWeekAndDayname($year,$week,$day)	//get date from ($year,$week,$day)
+echo $tgl;
+
+
+
+
