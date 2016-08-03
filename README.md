@@ -81,6 +81,30 @@ $arry=listWeekOfYearLayer($year,$layer,$even,$weekActive,$dayInt)
 			//$ary= Jadwal::listWeekOfYearLayer('2016','A','2',null,'1');		
 			$ary= Jadwal::listWeekOfYearLayer('2016','A','2','1','1');	
 			print_r(ary);
+	
+	C	odd/ganjil	
+			//$ary= Jadwal::listWeekOfYearLayer('2016','C','1');		
+			//$ary= Jadwal::listWeekOfYearLayer('2016','C','1',null,'1');		
+			$ary= Jadwal::listWeekOfYearLayer('2016','C','1','1','1');	
+			print_r(ary);
+	
+	C	even/genap
+			//$ary= Jadwal::listWeekOfYearLayer('2016','C','2');
+			//$ary= Jadwal::listWeekOfYearLayer('2016','C','2',null,'1');		
+			$ary= Jadwal::listWeekOfYearLayer('2016','C','2','1','1');	
+			print_r(ary);
+
+	D	odd/ganjil	
+			//$ary= Jadwal::listWeekOfYearLayer('2016','D','1');		
+			//$ary= Jadwal::listWeekOfYearLayer('2016','D','1',null,'1');		
+			$ary= Jadwal::listWeekOfYearLayer('2016','D','1','1','1');	
+			print_r(ary);
+	
+	D	even/genap
+			//$ary= Jadwal::listWeekOfYearLayer('2016','D','2');
+			//$ary= Jadwal::listWeekOfYearLayer('2016','D','2',null,'1');		
+			$ary= Jadwal::listWeekOfYearLayer('2016','D','2','1','1');	
+			print_r(ary);			
 			
 	Copy to Controller
 	

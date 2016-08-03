@@ -76,12 +76,46 @@ class Jadwal
 							$bil_awal++;
 						}
 					};					
-				}elseif($layerVal=='A'){
-					//ALL Ganjil Dan Genap |odd and even
+				}elseif($layerVal=='A'){ //no interlude
+					//ALL Ganjil Dan Genap |odd and even 
 					while ($bil_awal <= $ttlWeekOfYear) {
 							$aryWeek[]=$bil_awal;
 							$bil_awal++;				
 					}					
+				}elseif($layerVal=='C'){ //3week interlude
+					//ALL Ganjil Dan Genap |odd and even
+					$i=0;
+					while ($bil_awal <= $ttlWeekOfYear) {
+						if ($i==0){
+							$aryWeek[]=$bil_awal;
+							$bil_awal++;
+							$i=$i+1;
+						}else{
+							$bil_awal++;
+							if ($i==2){
+								$i=0;
+							}else{
+								$i=$i+1;
+							}							
+						}
+					}					
+				}elseif($layerVal=='D'){ //3week interlude
+					//ALL Ganjil Dan Genap |odd and even
+					$i=0;
+					while ($bil_awal <= $ttlWeekOfYear) {
+						if ($i==0){
+							$aryWeek[]=$bil_awal;
+							$bil_awal++;
+							$i=$i+1;
+						}else{
+							$bil_awal++;
+							if ($i==3){
+								$i=0;
+							}else{
+								$i=$i+1;
+							}							
+						}
+					}	
 				}else{
 					$result=0;
 				}				
@@ -112,6 +146,40 @@ class Jadwal
 							$aryWeek[]=$bil_awal;
 							$bil_awal++;				
 					}					
+				}elseif($layerVal=='C'){ //3week interlude
+					//ALL Ganjil Dan Genap |odd and even
+					$i=0;
+					while ($bil_awal <= $ttlWeekOfYear) {
+						if ($i==0){
+							$aryWeek[]=$bil_awal;
+							$bil_awal++;
+							$i=$i+1;
+						}else{
+							$bil_awal++;
+							if ($i==2){
+								$i=0;
+							}else{
+								$i=$i+1;
+							}							
+						}
+					}
+				}elseif($layerVal=='D'){ //3week interlude
+					//ALL Ganjil Dan Genap |odd and even
+					$i=0;
+					while ($bil_awal <= $ttlWeekOfYear) {
+						if ($i==0){
+							$aryWeek[]=$bil_awal;
+							$bil_awal++;
+							$i=$i+1;
+						}else{
+							$bil_awal++;
+							if ($i==3){
+								$i=0;
+							}else{
+								$i=$i+1;
+							}							
+						}
+					}	
 				}else{
 					$result=0;
 				}
