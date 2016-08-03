@@ -53,6 +53,89 @@ class Jadwal
 	}
 	
 	/**
+	 * INFO CURRENT YEAR | LAYER (A,B=default,C,D)
+	 * @author piter Novian <ptr.nov@gmail.com>
+	 * @since 1.0.0
+	*/
+	public static function listWeekOfYearLayer($year=null,$layer=null,$even='',$weekActive=null,$dayInt=null) { 				  
+		$yearVal=$year!=null?$year:date('Y');
+		$layerVal=$layer!=null?$layer:'B';
+		$ttlWeekOfYear= self::getIsoWeeksInYear($yearVal);			//get total week of year
+		$currentWeekNumber = date('W');								//get current week
+		$setWeek=$weekActive!=''?$weekActive:$currentWeekNumber;	//get set week or current week		
+		$tgl=self::getDateOfWeekAndDayname($yearVal,$setWeek,$dayInt);
+		$bil_awal = (int)$even; //1=ganjil; 2=genap
+		if ($even!=''){
+			if ($even==1){ //GANJIL - ODD				
+				if ($layerVal=='B'){
+					while ($bil_awal <= $ttlWeekOfYear) {
+						if ($bil_awal % 2 != 0) { //GANJIL									
+							$aryWeek[]=$bil_awal;
+							$bil_awal++;
+						}else{
+							$bil_awal++;
+						}
+					};					
+				}elseif($layerVal=='A'){
+					//ALL Ganjil Dan Genap |odd and even
+					while ($bil_awal <= $ttlWeekOfYear) {
+							$aryWeek[]=$bil_awal;
+							$bil_awal++;				
+					}					
+				}else{
+					$result=0;
+				}				
+				$weekCount=count($aryWeek);					//sum array even/genap
+				$result[]=[					
+						'tahun'=>$yearVal,					//array Year
+						'ttlWeek'=> $ttlWeekOfYear,			//array toral week of year
+						'currWeek'=>$currentWeekNumber,		//array current week
+						'countWeek'=>$weekCount,			//array week odd of year							
+						'aryWeek'=>$aryWeek,				//array week odd
+						'setDate'=>$tgl,					//date current / date set by week and day
+				];	
+				
+			}elseif($even==2){//GENAP -EVEN
+				if ($layerVal=='B'){
+					while ($bil_awal <= $ttlWeekOfYear) {
+						if ($bil_awal % 2 == 0) { //GENAP									
+							$aryWeek[]=$bil_awal;
+							$bil_awal++;
+						}else{
+							$bil_awal++;
+						}
+					}
+						
+				}elseif($layerVal=='A'){
+					//ALL Ganjil Dan Genap |odd and even
+					while ($bil_awal <= $ttlWeekOfYear) {
+							$aryWeek[]=$bil_awal;
+							$bil_awal++;				
+					}					
+				}else{
+					$result=0;
+				}
+				$weekCount=count($aryWeek);					//sum array even/genap
+				$result[]=[					
+						'tahun'=>$yearVal,					//array Year
+						'ttlWeek'=> $ttlWeekOfYear,			//array toral week of year
+						'currWeek'=>$currentWeekNumber,		//array current week
+						'countWeek'=>$weekCount,			//array week odd of year							
+						'aryWeek'=>$aryWeek,				//array week odd
+						'setDate'=>$tgl,					//date current / date set by week and day
+				];	
+			}else{
+				$result=0;
+			}
+		}else{
+			 $result=0;
+		}
+		return $result;
+	}
+	
+	
+	
+	/**
 	 * PRIVATE GET TOTAL WeekOfYear
 	 * @author piter Novian <ptr.nov@gmail.com>
 	 * @since 1.0.0
@@ -68,10 +151,16 @@ class Jadwal
 	 * @author piter Novian <ptr.nov@gmail.com>
 	 * @since 1.0.0
 	*/
-	public static function getDateOfWeekAndDayname($year,$week,$day) {
-		$week_start = new \DateTime();
-		$week_start->setISODate($year,$week,$day);
-		return $week_start->format('Y-m-d');
+	public static function getDateOfWeekAndDayname($year,$week=null,$day=null) {
+		$currentWeekNumber = date('W');					//current week
+		$setWeek=$week!=''?$week:$currentWeekNumber;	//get set week or current week	
+		if($day!=null){			
+			$week_start = new \DateTime();
+			$week_start->setISODate($year,$setWeek,$day);
+			return $week_start->format('Y-m-d');
+		}else{
+			return '0000-00-00';
+		}
 	}
 	
 	

@@ -34,15 +34,70 @@ Once the extension is installed, simply use it in your code by  :
 
 Use \ptrnov\yii2-salesforce\Jadwal;
 
+#INFORMATION WEEK OF YEAR
 $ary1=Jadwal::listWeekOfYear();				//current year
 print_r($ary1);
 
 $ary2=Jadwal::listWeekOfYear('2016');		//set manual
 print_r($ary2);
 
-$tgl=getDateOfWeekAndDayname($year,$week,$day)	//get date from ($year,$week,$day)
+#GET DATE FROM  YEAR,WEEK AND DAY
+$tgl=getDateOfWeekAndDayname($year,$week,$day)	
 echo $tgl;
 
+#Example
+//$tgl= Jadwal::getDateOfWeekAndDayname('2016','34','1');
+//$tgl= Jadwal::getDateOfWeekAndDayname('2016',null,'1');
+$tgl= Jadwal::getDateOfWeekAndDayname('2016','34',null);
 
+#listWeekOfYear AND Layer (A,B,C,D)
+#A=every week	  (not interlude)
+#B=2week of month (interlude=1week) -> default set
+#C=2week of month (interlude=2week)
+#D=1week of month (interlude=3week)
 
-
+$arry=listWeekOfYearLayer($year,$layer,$even,$weekActive,$dayInt)
+#Example 
+	B (default) -odd/ganjil	
+		//$ary= Jadwal::listWeekOfYearLayer('2016','B','1');	
+		//$ary= Jadwal::listWeekOfYearLayer('2016','B','1',null,'1');		
+		$ary= Jadwal::listWeekOfYearLayer('2016','B','1','1','1');		
+		print_r(ary);
+	
+	B (default) -even/genap
+		//$ary= Jadwal::listWeekOfYearLayer('2016','B','2');		
+		//$ary= Jadwal::listWeekOfYearLayer('2016','B','2',null,'1');		
+		$ary= Jadwal::listWeekOfYearLayer('2016','B','2','1','1');		
+		print_r(ary);
+		
+	A	odd/ganjil	
+			//$ary= Jadwal::listWeekOfYearLayer('2016','A','1');		
+			//$ary= Jadwal::listWeekOfYearLayer('2016','A','1',null,'1');		
+			$ary= Jadwal::listWeekOfYearLayer('2016','A','1','1','1');	
+			print_r(ary);
+	
+	A	even/genap
+			//$ary= Jadwal::listWeekOfYearLayer('2016','A','2');
+			//$ary= Jadwal::listWeekOfYearLayer('2016','A','2',null,'1');		
+			$ary= Jadwal::listWeekOfYearLayer('2016','A','2','1','1');	
+			print_r(ary);
+			
+	Copy to Controller
+	
+	Use \ptrnov\yii2-salesforce\Jadwal;
+	public function actionTest()
+    {
+			$ary= Jadwal::listWeekOfYearLayer('2016','A','1');
+			//print_r(Jadwal::listWeekOfYearLayer('2016','A','1'));
+			return $this->render('_test',[
+				'dataArray'=>$ary
+			]);
+     }		
+		
+	create file _test.php then write
+		<?php 
+			print_r(dataArray);
+			//ready to foreach
+		?>
+	
+		
