@@ -124,4 +124,6 @@ $arry=listWeekOfYearLayer($year,$layer,$even,$weekActive,$dayInt)
 			//ready to foreach
 		?>
 	
-		
+#NEW Function
+#getArrayDateCust($year,$layer,$oddeven,$dayInt,$scdlGrp,$custId,$useId)
+$ary= Jadwal::getArrayDateCust('2016','C','1','1','scdlGrp','cust.001','66');	

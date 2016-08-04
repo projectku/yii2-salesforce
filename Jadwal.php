@@ -231,6 +231,37 @@ class Jadwal
 		}
 	}
 	
+	public static function getArrayDateCust($year=null,$layer=null,$oddeven='',$dayInt=null, $scdlGrp=null,$custId=null,$useId=null){
+		$yearVal=$year!=null?$year:date('Y');
+		$layerVal=$layer!=null?$layer:'B';
+		$ttlWeekOfYear= self::getIsoWeeksInYear($yearVal);			//get total week of year
+		$currentWeekNumber = date('W');								//get current week
+		$bil_awal = (int)$oddeven; //1=ganjil; 2=genap
+		
+		$ary=self::listWeekOfYearLayer($yearVal,$layerVal,$bil_awal,$bil_awal,$dayInt);		
+		$aryWeekVal=ArrayHelper::getColumn($ary,'aryWeek');		
+		if ($oddeven!=''){
+			foreach($aryWeekVal[0] as $key){
+				// if ($key > 0) {
+					// $koma= ',';
+				// }else{
+					// $koma= '';
+				// };
+				//$aryData .=$koma.$key;
+				$aryDateRslt[]=[
+					'scdlGrp'=>$scdlGrp,
+					'custId'=>$custId,
+					'user_id'=>$useId,
+					'currenWeek'=>$key,
+					'status'=>1,
+					'tg'=>self::getDateOfWeekAndDayname($yearVal,$key,$dayInt)				
+				];
+			};
+		}else{
+			$aryDateRslt=0;
+		}
+		return $aryDateRslt;		
+	}
 	
 }  
 ?>
